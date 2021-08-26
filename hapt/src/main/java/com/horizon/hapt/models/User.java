@@ -1,6 +1,7 @@
 package com.horizon.hapt.models;
 
 import java.util.Date;
+import java.util.List;
 
 public class User {
     private String mail;
@@ -12,6 +13,7 @@ public class User {
     private int tel;
     private Date dateN;
     private Long id;
+    private List<Role> listRole;
 
     public User(String mail, String password, String nom, String prenom, String adresse, int cin, int tel, Date dateN,
             Long id) {
@@ -24,6 +26,14 @@ public class User {
         this.tel = tel;
         this.dateN = dateN;
         this.setId(id);
+    }
+
+    public List<Role> getListRole() {
+        return listRole;
+    }
+
+    public void setListRole(List<Role> listRole) {
+        this.listRole = listRole;
     }
 
     public Long getId() {
