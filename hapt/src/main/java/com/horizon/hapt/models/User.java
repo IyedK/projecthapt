@@ -1,57 +1,59 @@
 package com.horizon.hapt.models;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-public class User {
-    private String mail;
-    private String password;
-    private String nom;
-    private String prenom;
-    private String adresse;
-    private int cin;
-    private int tel;
-    private Date dateN;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+@Entity
+@Table(schema = "haptdb", uniqueConstraints = @UniqueConstraint(columnNames = "mail"))
+
+public class User implements Serializable {
+    private static final long serialVersionUID = 1l;
+    @Column
     private Long id;
-    private List<Role> listRole;
-    private List<Etudiant> listEtudiant;
-    private List<Entreprise> listEntreprise;
+    @Column
+    private String mail;
+    @Column
+    private String password;
+    @Column
+    private String nom;
+    @Column
+    private String prenom;
+    @Column
+    private String adresse;
+    @Column
+    private int cin;
+    @Column
+    private int tel;
+    @Column
+    private int niveau;
+    @Column
+    private Date dateN;
 
-    public User(String mail, String password, String nom, String prenom, String adresse, int cin, int tel, Date dateN,
-            Long id) {
-        this.mail = mail;
-        this.password = password;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.adresse = adresse;
-        this.cin = cin;
-        this.tel = tel;
-        this.dateN = dateN;
+    @ManyToOne
+    @JoinColumn(name = "role", referencedColumnName = "id")
+    private Role role;
+
+    public User(Long id, String mail, String password, String nom, String prenom, int cin, int tel, int niveau,
+            Date dateN, Long serialVersionUID) {
         this.setId(id);
+        this.setMail(mail);
+        this.password = password;
+
     }
 
-    public List<Entreprise> getListEntreprise() {
-        return listEntreprise;
+    public Role getRole() {
+        return role;
     }
 
-    public void setListEntreprise(List<Entreprise> listEntreprise) {
-        this.listEntreprise = listEntreprise;
-    }
-
-    public List<Etudiant> getListEtudiant() {
-        return listEtudiant;
-    }
-
-    public void setListEtudiant(List<Etudiant> listEtudiant) {
-        this.listEtudiant = listEtudiant;
-    }
-
-    public List<Role> getListRole() {
-        return listRole;
-    }
-
-    public void setListRole(List<Role> listRole) {
-        this.listRole = listRole;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public Long getId() {
@@ -62,36 +64,12 @@ public class User {
         this.id = id;
     }
 
-    public Date getDateN() {
-        return dateN;
+    public String getNom() {
+        return nom;
     }
 
-    public void setDateN(Date dateN) {
-        this.dateN = dateN;
-    }
-
-    public int getTel() {
-        return tel;
-    }
-
-    public void setTel(int tel) {
-        this.tel = tel;
-    }
-
-    public int getCin() {
-        return cin;
-    }
-
-    public void setCin(int cin) {
-        this.cin = cin;
-    }
-
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public String getPrenom() {
@@ -102,12 +80,44 @@ public class User {
         this.prenom = prenom;
     }
 
-    public String getNom() {
-        return nom;
+    public String getAdresse() {
+        return adresse;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public int getCin() {
+        return cin;
+    }
+
+    public void setCin(int cin) {
+        this.cin = cin;
+    }
+
+    public int getTel() {
+        return tel;
+    }
+
+    public void setTel(int tel) {
+        this.tel = tel;
+    }
+
+    public int getNiveau() {
+        return niveau;
+    }
+
+    public void setNiveau(int niveau) {
+        this.niveau = niveau;
+    }
+
+    public Date getDateN() {
+        return dateN;
+    }
+
+    public void setDateN(Date dateN) {
+        this.dateN = dateN;
     }
 
     public String getMail() {
@@ -124,6 +134,10 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public long getserialVersionUID() {
+        return serialVersionUID;
     }
 
 }
